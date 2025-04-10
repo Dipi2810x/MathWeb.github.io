@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Math Learner - Grades 5-6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>SA Math Learner</h1>
+        <p>Grade 5-6 Mathematics according to the South African Curriculum</p>
+    </header>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="whole-numbers">Whole Numbers</div>
+        <div class="tab" data-tab="fractions">Fractions</div>
+        <div class="tab" data-tab="geometry">Geometry</div>
+        <div class="tab" data-tab="measurement">Measurement</div>
+        <div class="tab" data-tab="quiz">Quiz</div>
+    </div>
+
+    <div id="whole-numbers" class="tab-content active">
+        <h2>Whole Numbers</h2>
+        <p>In grade 5-6, you'll work with whole numbers up to at least 6 digits.</p>
+        <h3>Key Concepts:</h3>
+        <ul>
+            <li>Place value (units, tens, hundreds, thousands, etc.)</li>
+            <li>Rounding off to nearest 10, 100, 1000</li>
+            <li>Addition and subtraction with large numbers</li>
+            <li>Multiplication and division (including long division)</li>
+            <li>Problem solving with whole numbers</li>
+        </ul>
+        <p><strong>Example:</strong> 345 672 + 128 945 = 474 617</p>
+    </div>
+
+    <div id="fractions" class="tab-content">
+        <h2>Fractions</h2>
+        <p>Fractions represent parts of a whole.</p>
+        <h3>Key Concepts:</h3>
+        <ul>
+            <li>Identifying fractions</li>
+            <li>Equivalent fractions</li>
+            <li>Comparing fractions</li>
+            <li>Adding and subtracting fractions with same denominator</li>
+            <li>Introduction to decimal fractions</li>
+        </ul>
+        <p><strong>Example:</strong> 3/4 + 1/4 = 4/4 = 1</p>
+    </div>
+
+    <div id="geometry" class="tab-content">
+        <h2>Geometry</h2>
+        <p>Study of shapes and their properties.</p>
+        <h3>Key Concepts:</h3>
+        <ul>
+            <li>2D shapes (triangles, quadrilaterals, circles)</li>
+            <li>3D objects (cubes, rectangular prisms, pyramids)</li>
+            <li>Lines of symmetry</li>
+            <li>Angles (right, acute, obtuse)</li>
+            <li>Perimeter and area of rectangles</li>
+        </ul>
+        <p><strong>Example:</strong> Perimeter of rectangle = 2 × (length + width)</p>
+    </div>
+
+    <div id="measurement" class="tab-content">
+        <h2>Measurement</h2>
+        <p>Working with different units of measurement.</p>
+        <h3>Key Concepts:</h3>
+        <ul>
+            <li>Length (mm, cm, m, km)</li>
+            <li>Mass (g, kg)</li>
+            <li>Capacity (ml, l)</li>
+            <li>Time (reading clocks, calculating duration)</li>
+            <li>Converting between units</li>
+        </ul>
+        <p><strong>Example:</strong> 1km = 1000m, 1m = 100cm, 1cm = 10mm</p>
+    </div>
+
+    <div id="quiz" class="tab-content">
+        <h2>Math Quiz</h2>
+        <p>Test your knowledge with this short quiz. Complete all fields.</p>
+        
+        <div class="student-info">
+            <h3>Student Information</h3>
+            <label for="name">First Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" required>
+            
+            <label for="grade">Grade:</label>
+            <select id="grade" required>
+                <option value="">Select Grade</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+            </select>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+            
+            <button id="startQuiz">Start Quiz</button>
+        </div>
+
+        <div id="quiz-content" class="hidden">
+            <div class="question">
+                <p>1. What is 345 672 + 128 945?</p>
+                <input type="number" id="q1" placeholder="Enter your answer">
+            </div>
+            
+            <div class="question">
+                <p>2. What is 3/4 + 1/4? (answer as a whole number or fraction)</p>
+                <input type="text" id="q2" placeholder="Enter your answer (e.g., 1 or 4/4)">
+            </div>
+            
+            <div class="question">
+                <p>3. How many sides does a quadrilateral have?</p>
+                <input type="number" id="q3" placeholder="Enter your answer">
+            </div>
+            
+            <div class="question">
+                <p>4. Calculate the perimeter of a rectangle with length 5cm and width 3cm.</p>
+                <input type="number" id="q4" placeholder="Enter your answer in cm">
+            </div>
+            
+            <div class="question">
+                <p>5. Convert 2.5km to meters.</p>
+                <input type="number" id="q5" placeholder="Enter your answer in meters">
+            </div>
+            
+            <button id="submitQuiz">Submit Quiz</button>
+        </div>
+
+        <div id="results" class="hidden">
+            <h3>Quiz Results</h3>
+            <p id="resultText"></p>
+            <p id="timeTaken"></p>
+            <p id="completionDate"></p>
+            <p id="studentDetails"></p>
+            <p id="score"></p>
+            <p>A copy of your results has been sent to your teacher.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 SA Math Learner - Aligned with the South African Curriculum</p>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Quiz functionality
+        document.getElementById('startQuiz').addEventListener('click', function() {
+            // Validate all fields are filled
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const grade = document.getElementById('grade').value;
+            const gender = document.getElementById('gender').value;
+            
+            if (!name || !surname || !grade || !gender) {
+                alert('Please fill in all student information fields.');
+                return;
+            }
+            
+            // Hide student info and show quiz content
+            document.querySelector('.student-info').classList.add('hidden');
+            document.getElementById('quiz-content').classList.remove('hidden');
+            
+            // Record start time
+            quizStartTime = new Date();
+        });
+        
+        document.getElementById('submitQuiz').addEventListener('click', function() {
+            // Calculate time taken
+            const quizEndTime = new Date();
+            const timeTaken = Math.floor((quizEndTime - quizStartTime) / 1000); // in seconds
+            
+            // Get student info
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const grade = document.getElementById('grade').value;
+            const gender = document.getElementById('gender').value;
+            
+            // Check answers
+            let score = 0;
+            
+            // Question 1
+            const q1 = parseInt(document.getElementById('q1').value);
+            if (q1 === 474617) score++;
+            
+            // Question 2
+            const q2 = document.getElementById('q2').value.toLowerCase();
+            if (q2 === '1' || q2 === '4/4' || q2 === '1/1') score++;
+            
+            // Question 3
+            const q3 = parseInt(document.getElementById('q3').value);
+            if (q3 === 4) score++;
+            
+            // Question 4
+            const q4 = parseInt(document.getElementById('q4').value);
+            if (q4 === 16) score++;
+            
+            // Question 5
+            const q5 = parseInt(document.getElementById('q5').value);
+            if (q5 === 2500) score++;
+            
+            // Calculate percentage
+            const percentage = (score / 5) * 100;
+            
+            // Format date and time
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const completionDate = quizEndTime.toLocaleDateString('en-ZA', options);
+            
+            // Display results
+            document.getElementById('quiz-content').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            
+            document.getElementById('resultText').textContent = `Quiz completed!`;
+            document.getElementById('timeTaken').textContent = `Time taken: ${timeTaken} seconds`;
+            document.getElementById('completionDate').textContent = `Completed on: ${completionDate}`;
+            document.getElementById('studentDetails').textContent = `Student: ${name} ${surname}, Grade ${grade}, ${gender}`;
+            document.getElementById('score').textContent = `Score: ${score}/5 (${percentage}%)`;
+            
+            // Prepare email content
+            const emailSubject = `Math Quiz Results - ${name} ${surname}`;
+            const emailBody = `Student: ${name} ${surname}
+Grade: ${grade}
+Gender: ${gender}
+Completion Date: ${completionDate}
+Time Taken: ${timeTaken} seconds
+Score: ${score}/5 (${percentage}%)
+
+Question 1: ${q1} (Correct answer: 474617)
+Question 2: ${q2} (Correct answer: 1 or 4/4)
+Question 3: ${q3} (Correct answer: 4)
+Question 4: ${q4} (Correct answer: 16)
+Question 5: ${q5} (Correct answer: 2500)`;
+            
+            // In a real implementation, you would send this to your server to email
+            // For now, we'll just log it and show a mailto link
+            console.log("Would send email with:", emailSubject, emailBody);
+            
+            // Create a mailto link (this will open the user's email client)
+            const mailtoLink = `mailto:teacher@example.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // In a real implementation, you would use server-side code or an email API to send this automatically
+            // For demonstration, we'll show a button to open email client
+            const emailButton = document.createElement('button');
+            emailButton.textContent = 'Send Results to Teacher';
+            emailButton.onclick = function() {
+                window.location.href = mailtoLink;
+            };
+            document.getElementById('results').appendChild(emailButton);
+        });
+        
+        let quizStartTime;
+    </script>
+</body>
+</html>
