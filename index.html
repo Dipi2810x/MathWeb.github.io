@@ -261,15 +261,12 @@ Question 3: ${q3} (Correct answer: 4)
 Question 4: ${q4} (Correct answer: 16)
 Question 5: ${q5} (Correct answer: 2500)`;
             
-            // In a real implementation, you would send this to your server to email
-            // For now, we'll just log it and show a mailto link
+            
             console.log("Would send email with:", emailSubject, emailBody);
             
-            // Create a mailto link (this will open the user's email client)
-            const mailtoLink = `mailto:teacher@example.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            const mailtoLink = `mailto:ramjugernathdipika@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
             
-            // In a real implementation, you would use server-side code or an email API to send this automatically
-            // For demonstration, we'll show a button to open email client
+            
             const emailButton = document.createElement('button');
             emailButton.textContent = 'Send Results to Teacher';
             emailButton.onclick = function() {

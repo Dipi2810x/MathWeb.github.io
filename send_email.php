@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $to = 'ramjugernathdipika@gmail.com'; // Change to your email
+    $to = 'ramjugernathdipika@gmail.com'; 
     $subject = $_POST['subject'];
     $body = $_POST['body'];
     $headers = 'From: webmaster@example.com' . "\r\n" .
